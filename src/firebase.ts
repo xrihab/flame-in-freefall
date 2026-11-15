@@ -1,16 +1,32 @@
-import { initializeApp } from "firebase/app";
-import { getAI, getGenerativeModel, GoogleAIBackend } from "firebase/ai";
+const API_KEY = "AIzaSyCmho05whQKuzqH-9XI-13tBak-ZdiXy0Q";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCmho05whQKuzqH-9XI-13tBak-ZdiXy0Q",
-  authDomain: "flame-in-freefall-rolex.firebaseapp.com",
-  projectId: "flame-in-freefall-rolex",
-  storageBucket: "flame-in-freefall-rolex.firebasestorage.app",
-  messagingSenderId: "312916728560",
-  appId: "1:312916728560:web:9a380eef84027cdd0d8035",
-  measurementId: "G-VZT27K3W9L"
+export const model = {
+  async generateContent(prompt: string | any) {
+    const textPrompt = typeof prompt === "string" ? prompt : JSON.stringify(prompt);
+    
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: textPrompt }] }]
+        })
+      }
+    );
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error?.message || `HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+
+    return {
+      response: {
+        text: () => replyText
+      }
+    };
+  }
 };
-
-const app = initializeApp(firebaseConfig);
-const ai = getAI(app, { backend: new GoogleAIBackend() });
-export const model = getGenerativeModel(ai, { model: "gemini-3.8-flash" });
