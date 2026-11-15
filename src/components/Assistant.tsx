@@ -1,49 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { Answer, STARTERS, answerFor } from '../data';
+import { model } from '../firebase';
+import { ALERTS, EXPERIMENTS, LESSONS, STARTERS } from '../data';
 
-interface Msg {
-  role: 'user' | 'bot';
-  text?: string;
-  answer?: Answer;
-}
+type Msg = { role: 'user' | 'bot'; text: string };
 
-function AnswerView({ a }: { a: Answer }) {
-  return (
-    <div className="space-y-3 text-sm">
-      <div>
-        <div className="font-display italic text-2xl text-amber-200 leading-none">{a.headline}</div>
-        <p className="text-slate-100 font-medium mt-1 leading-relaxed">{a.recommendation}</p>
-      </div>
-      {a.evidence.length > 0 && (
-        <div>
-          <div className="text-[11px] text-slate-500 font-mono mb-1">evidence</div>
-          <ul className="space-y-2">
-            {a.evidence.map((e) => (
-              <li key={e.name} className="rounded-lg bg-white/[0.04] border border-white/5 p-2.5">
-                <div className="flex justify-between gap-2">
-                  <span className="font-mono text-xs text-amber-300">{e.name}</span>
-                  <a href={e.link} target="_blank" rel="noopener noreferrer" className="text-[11px] text-slate-400 hover:text-white shrink-0">
-                    Source ↗
-                  </a>
-                </div>
-                <p className="text-xs text-slate-300 mt-1 leading-relaxed">{e.text}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <div>
-        <div className="text-[11px] text-slate-500 font-mono mb-1">engineering actions</div>
-        <ul className="space-y-1 text-xs text-slate-300 list-disc pl-4">
-          {a.actions.map((x) => (
-            <li key={x}>{x}</li>
-          ))}
-        </ul>
-      </div>
-      <p className="text-[11px] text-amber-200/70 border-t border-white/5 pt-2">Limits: {a.caveat}</p>
-    </div>
-  );
-}
+const systemContext = `You are the SI Safety Assistant. Answer using only the verified NASA data below.
+Do not invent facts, thresholds, or sources. If the data does not answer a question, say so.
+When relevant, cite the dataset item by name and include its source URL. Distinguish NASA findings from recommendations or limitations in the data.
+
+Verified NASA data:
+${JSON.stringify({ experiments: EXPERIMENTS, alerts: ALERTS, lessons: LESSONS })}`;
 
 export default function Assistant({ onClose }: { onClose: () => void }) {
   const [msgs, setMsgs] = useState<Msg[]>([]);
@@ -55,14 +21,27 @@ export default function Assistant({ onClose }: { onClose: () => void }) {
     end.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [msgs, typing]);
 
-  const ask = (q: string, a?: Answer) => {
+  const ask = async (q: string) => {
     if (!q.trim() || typing) return;
     setMsgs((m) => [...m, { role: 'user', text: q }]);
     setTyping(true);
-    setTimeout(() => {
-      setMsgs((m) => [...m, { role: 'bot', answer: a ?? answerFor(q) }]);
+    try {
+      const result = await model.generateContent({
+        systemInstruction: systemContext,
+        contents: [{ role: 'user', parts: [{ type: 'text', text: q }] }],
+      });
+      const answer = result.response.text().trim();
+      if (!answer) throw new Error('The model returned an empty response.');
+      setMsgs((m) => [...m, { role: 'bot', text: answer }]);
+    } catch (error) {
+      console.error('Failed to generate assistant response:', error);
+      setMsgs((m) => [
+        ...m,
+        { role: 'bot', text: 'Unable to generate an answer right now. Please try again.' },
+      ]);
+    } finally {
       setTyping(false);
-    }, 550);
+    }
   };
 
   return (
@@ -86,7 +65,7 @@ export default function Assistant({ onClose }: { onClose: () => void }) {
             {STARTERS.map((s) => (
               <button
                 key={s.q}
-                onClick={() => ask(s.q, s.a)}
+                onClick={() => ask(s.q)}
                 className="w-full text-left text-sm rounded-2xl border border-amber-400/25 bg-amber-400/[0.04] hover:bg-amber-400/10 hover:border-amber-400/50 px-3.5 py-3 text-amber-50 cursor-pointer transition"
               >
                 {s.q}
@@ -103,7 +82,7 @@ export default function Assistant({ onClose }: { onClose: () => void }) {
             </div>
           ) : (
             <div key={i} className="fade-up rounded-2xl rounded-bl-sm bg-white/[0.05] border border-white/10 p-3">
-              <AnswerView a={m.answer!} />
+              <p className="text-sm text-slate-100 leading-relaxed whitespace-pre-wrap">{m.text}</p>
             </div>
           ),
         )}
@@ -113,7 +92,7 @@ export default function Assistant({ onClose }: { onClose: () => void }) {
             {STARTERS.map((s) => (
               <button
                 key={s.q}
-                onClick={() => ask(s.q, s.a)}
+                onClick={() => ask(s.q)}
                 className="text-[11px] rounded-full border border-white/10 px-2.5 py-1 text-slate-400 hover:text-white hover:border-amber-400/40 cursor-pointer"
               >
                 {s.q.length > 38 ? s.q.slice(0, 36) + '…' : s.q}
