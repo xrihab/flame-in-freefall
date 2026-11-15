@@ -8,6 +8,9 @@
 
 **Flame in Freefall** is an interactive aerospace dashboard built for the **2026 NASA Space Apps Challenge**. It bridges the gap between dense NASA microgravity combustion archives and practical fire safety rules for future spacecraft and lunar habitats.
 
+<img width="2940" height="1762" alt="image" src="https://github.com/user-attachments/assets/c05dbf29-2f6f-48c3-93de-43a7d63a4e84" />
+
+
 ---
 
 ## 🚀 The Problem
@@ -32,7 +35,8 @@ For decades, NASA has conducted groundbreaking combustion experiments aboard the
 ## 🖥️ Live Demo
 Explore the live application here: **[xrihab.github.io/flame-in-freefall](https://xrihab.github.io/flame-in-freefall)**
 
-*(Tip: Replace this line with a screenshot or GIF of your dashboard using `![Dashboard Preview](link-to-image.png)`)*
+<img width="2940" height="1760" alt="image" src="https://github.com/user-attachments/assets/5017d310-29ea-4717-a57c-07c703c8ae18" />
+
 
 ---
 
