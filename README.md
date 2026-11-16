@@ -43,9 +43,9 @@ Explore the live application here: **[xrihab.github.io/flame-in-freefall](https:
 ---
 
 ## 🛠️ Built With
-* **Frontend:** HTML5, CSS3, JavaScript *(update with React/Next.js/Tailwind if used)*
+* **Frontend:** Mostly Typescript, then HTML5, CSS3, JavaScript
 * **Deployment:** GitHub Pages & Vercel
-* **Data Sources:** NASA Physical Sciences Informatics (PSI), NASA Technical Reports Server (NTRS), and official 2026 NASA Space Apps Challenge datasets.
+* **Data Sources:** NASA Physical Sciences Informatics (PSI), NASA Technical Reports Server (NTRS), and official 2026 NASA Space Apps Challenge datasets. All sources used are hyperlinked at the end of the website page
 
 ---
 
@@ -54,4 +54,5 @@ To run this project locally on your machine:
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/xrihab/flame-in-freefall.git](https://github.com/xrihab/flame-in-freefall.git)
+   git clone [https://github.com/xrihab/flame-in-freefall.git](https://github.com/xrihab/flame-in-freefall.git
+2. Or use any of the links available to access/run the website
