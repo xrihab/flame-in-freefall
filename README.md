@@ -10,8 +10,7 @@ Team- Rihabuddin Mohammed, Farhan Shaik, Yash Vardhan Amduri, & Harshith Vardhan
 
 **Flame in Freefall** is an interactive aerospace dashboard built for the **2026 NASA Space Apps Challenge**. It bridges the gap between dense NASA microgravity combustion archives and practical fire safety rules for future spacecraft and lunar habitats.
 
-<img width="2940" height="1762" alt="image" src="https://github.com/user-attachments/assets/c05dbf29-2f6f-48c3-93de-43a7d63a4e84" />
-
+<img width="1470" height="881" alt="Screenshot 2026-11-15 at 11 27 55 PM" src="https://github.com/user-attachments/assets/026c7ea7-9ae9-4e9e-9e0d-bfc5ceaf9cb6" />
 
 ---
 
@@ -37,7 +36,10 @@ For decades, NASA has conducted groundbreaking combustion experiments aboard the
 ## 🖥️ Live Demo
 Explore the live application here: **[xrihab.github.io/flame-in-freefall](https://xrihab.github.io/flame-in-freefall)**
 
-<img width="2940" height="1760" alt="image" src="https://github.com/user-attachments/assets/5017d310-29ea-4717-a57c-07c703c8ae18" />
+Watch the video demo here: **[NASA Space Apps Challenge - Team Rolex Flames in Freefall](https://drive.google.com/file/d/1dA7LoPPnO5aY_ApqSpJO3lwptM1l-pGx/view?usp=sharing)**
+
+
+https://github.com/user-attachments/assets/29258df5-42e0-450e-9d68-04007ad84b4d
 
 
 ---
