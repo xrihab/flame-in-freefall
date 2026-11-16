@@ -255,7 +255,7 @@ export default function App() {
           onClick={() => setChat(true)}
           className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-[#08070C] font-bold text-sm pl-4 pr-5 py-3 shadow-[0_10px_40px_rgba(234,88,12,.45)] hover:brightness-110 transition cursor-pointer"
         >
-          <span className="w-2 h-2 rounded-full bg-[#08070C] animate-pulse" /> SI Safety Assistant
+          <span aria-hidden>🔥</span> SI Safety Assistant
         </button>
       )}
 
