@@ -79,7 +79,7 @@ export default function Assistant({ onClose }: { onClose: () => void }) {
 
       <div className="flex-1 overflow-y-auto scroll-thin p-4 space-y-4">
         <div className="text-sm text-slate-300">
-          Ask a question or tap a starter to get a structured engineering recommendation.
+          Pick a starter question to see a verified, source-linked engineering recommendation.
         </div>
         {msgs.length === 0 && (
           <div className="space-y-2">
@@ -135,7 +135,7 @@ export default function Assistant({ onClose }: { onClose: () => void }) {
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask about detectors, rovers, materials…"
+          placeholder="Or type a keyword: detectors, rovers, materials…"
           className="flex-1 bg-white/5 border border-white/10 rounded-full px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-400/50"
         />
         <button className="bg-gradient-to-r from-amber-400 to-orange-500 text-[#08070C] font-bold text-sm rounded-full px-5 cursor-pointer hover:brightness-110">Send</button>
