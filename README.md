@@ -1,6 +1,8 @@
 # 🔥 Flame in Freefall
 ### Translating Decades of NASA Microgravity Combustion Research into Actionable Space Safety
 
+Team- Rihabuddin Mohammed, Farhan Shaik, Yash Vardhan Amduri, & Harshith Vardhan Amduri
+
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Explore_Dashboard-blue?style=for-the-badge)](https://xrihab.github.io/flame-in-freefall)
 [![NASA Space Apps 2026](https://img.shields.io/badge/NASA_Space_Apps-2026_Challenge-red?style=for-the-badge)](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/)
 
