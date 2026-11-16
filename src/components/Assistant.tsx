@@ -69,7 +69,7 @@ export default function Assistant({ onClose }: { onClose: () => void }) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
         <div>
-          <div className="font-bold text-white text-sm flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_10px_#f59e0b] animate-pulse" />SI Safety Assistant</div>
+          <div className="font-bold text-white text-sm flex items-center gap-2"><span aria-hidden>🔥</span>SI Safety Assistant</div>
           <div className="text-[11px] text-slate-400">Answers cite only verified NASA data</div>
         </div>
         <button onClick={onClose} aria-label="Collapse assistant" className="w-8 h-8 rounded-full border border-white/10 text-slate-400 hover:text-white cursor-pointer">
